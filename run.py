@@ -127,6 +127,19 @@ Be critical but constructive, and always strive for objectivity.
 
     # Run workflow
     results = orchestrator.run_workflow(args.query, max_turns=args.turns)
+    print("\n" + "=" * 50)
+    print("FINAL RESEARCH RESULTS")
+    print("=" * 50)
+    final_synth_message = None
+    for message in reversed(results):
+        if message['agent'] == 'SynthBot':
+            final_synth_message = message
+            break
+
+    if final_synth_message:
+        print(f"\nFINAL SYNTHESIS:\n{final_synth_message['content']}\n")
+    else:
+        print("\nNo synthesis found in results.\n")
 
     # Save transcript
     orchestrator.save_transcript(args.output)

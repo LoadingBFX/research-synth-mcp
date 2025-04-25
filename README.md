@@ -220,6 +220,105 @@ The system generates a structured JSON transcript that shows the full conversati
   ...
 ]
 ```
+Terminal output will also show the progress of the research and synthesis process, including the turn-by-turn dialogue between the agents.
+```bash
+python run.py --query "Research the impact of quantum computing on encryption standards" --researcher groq --synthesizer groq
+Starting research on: Research the impact of quantum computing on encryption standards
+Researcher: groq (llama3-70b-8192)
+Synthesizer: groq (llama3-70b-8192)
+Starting workflow with query: Research the impact of quantum computing on encryption standards
+
+[Human → ResearchBot]: Research the impact of quantum computing on encryption standards
+
+--- Turn 1 ---
+
+[ResearchBot thinking...]
+[ResearchBot]: **Introduction**
+
+Quantum computing has the potential to revolutionize various fields, including cryptography and encryption. The advent of quantum co...
+
+[SynthBot thinking...]
+[SynthBot]: **Synthesis of Key Points**
+
+The research highlights the significant threat posed by quantum computing to classical encryption standards, which are cu...
+
+--- Turn 2 ---
+
+[ResearchBot thinking...]
+[ResearchBot]: **Investigation of Gaps and Areas for Further Explanation**
+
+Based on the synthesis and critique above, I will investigate further on the following ga...
+
+[SynthBot thinking...]
+[SynthBot]: **Synthesis of Key Points**
+
+The research provides an overview of the impact of quantum computing on encryption standards, highlighting the threats po...
+
+--- Turn 3 ---
+
+[ResearchBot thinking...]
+[ResearchBot]: **Investigation of Gaps and Areas for Further Explanation**
+
+Based on the synthesis and critique above, I will investigate further on the following ga...
+
+[SynthBot thinking...]
+[SynthBot]: **Synthesis of Key Points**
+
+The research provides an overview of the impact of quantum computing on encryption standards, highlighting the threats po...
+
+==================================================
+FINAL RESEARCH RESULTS
+==================================================
+
+FINAL SYNTHESIS:
+**Synthesis of Key Points**
+
+The research provides an overview of the impact of quantum computing on encryption standards, highlighting the threats posed by quantum computers to classical encryption algorithms and the efforts to develop quantum-resistant cryptography. The key points can be summarized as follows:
+
+1. **Quantum computers can break classical encryption algorithms**: Quantum computers can factor large numbers and compute discrete logarithms more efficiently than classical computers, breaking certain encryption algorithms like RSA and ECC.
+2. **Vulnerabilities and risks**: The breakage of classical encryption algorithms poses significant risks to data security, online transactions, and communication.
+3. **Quantum-resistant cryptography**: Researchers are working on developing quantum-resistant cryptography, including lattice-based, code-based, multivariate, and hybrid approaches.
+4. **Efforts and initiatives**: Organizations like NIST, Google, and IBM are actively working on standardizing and implementing quantum-resistant cryptography.
+
+**Critical Analysis**
+
+While the research provides a comprehensive overview of the impact of quantum computing on encryption standards, there are some limitations and areas for further investigation:
+
+1. **Lack of technical depth**: The research could benefit from a more in-depth technical analysis of the quantum algorithms and their implications for classical encryption algorithms.
+2. **Limited discussion of implementation challenges**: The research could explore the implementation challenges and trade-offs associated with deploying quantum-resistant cryptography in real-world systems.
+3. **Overemphasis on cryptographic schemes**: The research focuses primarily on cryptographic schemes, but could benefit from a broader discussion of the cybersecurity implications of quantum computing, including potential attacks and vulnerabilities.
+4. **Need for more concrete timelines**: The research could provide more concrete timelines for the development and deployment of quantum-resistant cryptography, as well as the potential risks and consequences of not adopting these standards.
+
+**Strengths and Weaknesses**
+
+Strengths:
+
+* Provides a comprehensive overview of the impact of quantum computing on encryption standards
+* Highlights the importance of developing quantum-resistant cryptography
+* Discusses the efforts and initiatives of organizations working on standardizing and implementing quantum-resistant cryptography
+
+Weaknesses:
+
+* Lacks technical depth in discussing quantum algorithms and their implications for classical encryption algorithms
+* Limited discussion of implementation challenges and trade-offs associated with deploying quantum-resistant cryptography
+* Overemphasis on cryptographic schemes, with limited discussion of broader cybersecurity implications of quantum computing
+* Need for more concrete timelines for development and deployment of quantum-resistant cryptography
+
+**Recommendations**
+
+To strengthen the research, I would recommend the following:
+
+1. **Conduct a more in-depth technical analysis**: Provide a more detailed technical analysis of the quantum algorithms and their implications for classical encryption algorithms.
+2. **Explore implementation challenges and trade-offs**: Discuss the implementation challenges and trade-offs associated with deploying quantum-resistant cryptography in real-world systems.
+3. **Broaden the discussion to include cybersecurity implications**: Explore the broader cybersecurity implications of quantum computing, including potential attacks and vulnerabilities.
+4. **Provide concrete timelines and risk assessments**: Provide more concrete timelines for the development and deployment of quantum-resistant cryptography, as well as the potential risks and consequences of not adopting these standards.
+
+By addressing these limitations and areas for further investigation, the research can provide a more comprehensive and nuanced understanding of the impact of quantum computing on encryption standards and the importance of adopting quantum-resistant cryptography.
+
+Transcript saved to mcp_transcript.json
+Research complete! Transcript saved to mcp_transcript.json
+
+```
 
 ## Configuration Strategies
 
