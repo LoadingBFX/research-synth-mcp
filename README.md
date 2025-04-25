@@ -18,7 +18,7 @@ The system enables these agents to collaborate with minimal human intervention a
 - **Context Preservation**: Maintains conversation history with reference tracking to build on previous exchanges
 - **Multi-Turn Dialogue**: Supports iterative refinement through structured conversation sequences
 - **Minimal Human Intervention**: Autonomous research flow after initial query
-- **Flexible LLM Integration**: Works with different LLM providers (OpenAI, Anthropic, etc.)
+- **Flexible LLM Integration**: Works with different LLM providers (Groq, OpenAI, etc.)
 - **Transcript Generation**: Exports complete conversation history in structured format
 
 ## Architecture
@@ -46,7 +46,7 @@ The system architecture consists of four main components:
         │                       │
         ▼                       ▼
 ┌───────────────┐       ┌───────────────┐
-│  OpenAI API   │       │ Anthropic API │
+│   Groq API    │       │  OpenAI API   │
 └───────────────┘       └───────────────┘
 ```
 
@@ -54,36 +54,86 @@ The system architecture consists of four main components:
 
 ### Prerequisites
 
-- Python 3.8+
-- API keys for at least one LLM provider (OpenAI, Anthropic, etc.)
+- Python 3.8 or newer
+- API key for either Groq or OpenAI (or both, for maximum flexibility)
+- Optional: LiteLLM proxy URL for OpenAI (for additional routing options)
 
 ### Setup
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/research-synth-mcp.git
-   cd research-synth-mcp
-   ```
+1. Clone the repository and set up your environment:
+```bash
+# Clone the repository
+git clone https://github.com/LoadingBFX/research-synth-mcp.git
+cd research-synth-mcp
 
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   # On Windows
-   venv\Scripts\activate
-   # On macOS/Linux
-   source venv/bin/activate
-   ```
+# Create a virtual environment
+python -m venv venv
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
 
-4. Create a `.env` file with your API keys:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   ANTHROPIC_API_KEY=your_anthropic_api_key_here
-   ```
+# Install dependencies
+pip install -r requirements.txt
+```
+
+2. API Key Setup
+Create a `.env` file in the project root to store your API keys:
+```
+# Add one or both API keys depending on which services you plan to use
+GROQ_API_KEY=your_groq_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional: Add LiteLLM base URL for OpenAI routing
+LITELLM_BASE_URL=your_litellm_proxy_url_here
+```
+
+### Getting API Keys
+
+#### Groq API Key (Free Option)
+Groq currently offers free API access to their hosted models, including Llama 3:
+
+1. Create an account at [console.groq.com](https://console.groq.com)
+2. Go to the "API Keys" section in your account settings
+3. Create a new API key and copy it
+4. Paste it into your `.env` file
+
+#### OpenAI API Key (Paid Option)
+To use OpenAI models:
+
+1. Create an account at [platform.openai.com](https://platform.openai.com)
+2. Set up billing in your account settings
+3. Go to the "API Keys" section and create a new secret key
+4. Copy the key and paste it into your `.env` file
+
+#### Setting Up LiteLLM Proxy (Optional)
+You can use LiteLLM as a proxy to route requests to OpenAI models. This is helpful for:
+
+- Centralizing API key management
+- Adding rate limiting and quotas
+- Routing to different model providers with the same interface
+
+To set up LiteLLM:
+
+1. Install LiteLLM: `pip install litellm`
+2. Run LiteLLM as a proxy server: `litellm --model gpt-3.5-turbo`
+3. Set the proxy URL in your `.env` file: `LITELLM_BASE_URL=http://localhost:4000`
+
+For more advanced LiteLLM proxy configurations, refer to the LiteLLM documentation.
+
+## Available Models
+
+### Groq Models
+- `llama3-8b-8192`: Smaller, faster Llama 3 model
+- `llama3-70b-8192`: Larger, more capable Llama 3 model (recommended)
+- `mixtral-8x7b-32768`: Mixtral model with large context window
+
+### OpenAI Models
+- `gpt-3.5-turbo`: Fast, cost-effective model
+- `gpt-4o`: High-quality reasoning model with vision capabilities
+- `gpt-4-turbo`: Powerful model with large context window
 
 ## Usage
 
@@ -93,6 +143,42 @@ The system architecture consists of four main components:
 # Run with a single query
 python run.py --query "Research the impact of quantum computing on encryption standards" --turns 3 --output "quantum_research.json"
 ```
+
+### Configuration Options
+
+The system allows you to mix and match different agent types and models for both the researcher and synthesizer roles.
+
+#### Using Groq for Both Agents (Free)
+```bash
+python run.py --query "Research the impact of quantum computing on encryption standards" --researcher groq --synthesizer groq
+```
+
+#### Using OpenAI for Both Agents (Paid)
+```bash
+python run.py --query "Research the impact of quantum computing on encryption standards" --researcher openai --synthesizer openai
+```
+
+#### Using OpenAI with LiteLLM Proxy
+```bash
+# Make sure LITELLM_BASE_URL is set in your .env file
+python run.py --query "Research the impact of quantum computing on encryption standards" --researcher openai --synthesizer openai
+```
+
+#### Using a Mixed Approach
+You can also combine different providers for different roles:
+```bash
+python run.py --query "Research the impact of quantum computing on encryption standards" --researcher groq --researcher-model llama3-70b-8192 --synthesizer openai --synthesizer-model gpt-4o
+```
+
+### Command Line Options
+
+- `--query`: The research question (required)
+- `--turns`: Number of conversation turns (default: 3)
+- `--output`: Output file path for transcript (default: mcp_transcript.json)
+- `--researcher`: LLM provider for researcher agent (choices: "groq", "openai", default: "groq")
+- `--researcher-model`: Specific model for researcher (if not specified, defaults to llama3-70b-8192 for Groq and gpt-4o for OpenAI)
+- `--synthesizer`: LLM provider for synthesizer agent (choices: "groq", "openai", default: "groq")
+- `--synthesizer-model`: Specific model for synthesizer (if not specified, defaults to llama3-70b-8192 for Groq and gpt-4o for OpenAI)
 
 ### Advanced Configuration
 
@@ -135,6 +221,62 @@ The system generates a structured JSON transcript that shows the full conversati
 ]
 ```
 
+## Configuration Strategies
+
+Here are some effective configurations to consider:
+
+### Budget-Conscious Setup (All Free)
+- Researcher: Groq with llama3-70b-8192
+- Synthesizer: Groq with llama3-70b-8192
+- Good quality results with no cost
+
+### Maximum Quality Setup (Paid)
+- Researcher: OpenAI with gpt-4o
+- Synthesizer: OpenAI with gpt-4o
+- Highest quality results but at a cost
+
+### Balanced Approach (Hybrid)
+- Researcher: Groq with llama3-70b-8192 (free)
+- Synthesizer: OpenAI with gpt-4o (paid)
+- This leverages the free Groq model for initial research and the more capable OpenAI model for critical analysis and synthesis, providing good value for money
+
+### Self-Hosted Approach (with LiteLLM)
+- Set up LiteLLM proxy on your server
+- Configure LiteLLM to route to different model providers
+- Use the same interface for all agents through the proxy
+
+## Using LiteLLM for Additional Models
+
+LiteLLM can proxy requests to many other models beyond OpenAI, including:
+- Anthropic (Claude)
+- Google (Gemini)
+- Cohere
+- Local models via Ollama
+
+To use these additional models:
+1. Set up LiteLLM with appropriate configurations
+2. Update the OpenAI agent to use the correct model names through the proxy
+3. Add the appropriate API keys to your LiteLLM configuration
+
+## Project Structure
+
+Ensure your project has the following structure:
+```
+research-synth-mcp/
+├── .env                  # API key configuration
+├── requirements.txt      # Dependencies
+├── run.py                # Main script
+├── mcp/
+│   ├── __init__.py
+│   └── protocol.py       # MCP implementation
+├── agents/
+│   ├── __init__.py
+│   ├── base.py           # Base agent class
+│   ├── openai_agent.py   # OpenAI implementation
+│   └── groq_agent.py     # Groq implementation
+└── orchestrator.py       # Orchestration logic
+```
+
 ## Extending the System
 
 ### Adding New Agent Types
@@ -161,6 +303,14 @@ memory.add_fact("RSA-2048 requires approximately 4,000 logical qubits to break",
 memory.save()
 ```
 
+## Troubleshooting
+
+- **API Key Issues**: Verify your API keys are correct and have the necessary permissions
+- **Rate Limiting**: Both providers impose rate limits. If you encounter errors, consider adding delays between turns
+- **LiteLLM Connection**: If using LiteLLM, make sure the proxy server is running and accessible
+- **Model Availability**: If specific models become unavailable, try alternative models from the same provider
+- **Installation Problems**: Make sure you have the latest versions of all required packages
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -178,7 +328,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 
 - The Model Context Protocol community for specification development
-- OpenAI and Anthropic for providing powerful language models
+- Groq and OpenAI for providing powerful language models
 - All contributors to this project
 
 ## Citation
@@ -190,6 +340,6 @@ If you use this code in your research, please cite:
   author = {Fanxing Bu},
   title = {Research-Synth-MCP: A Multi-Agent System Using Model Context Protocol},
   year = {2025},
-  url = {https://github.com/yourusername/research-synth-mcp}
+  url = {https://github.com/LoadingBFX/research-synth-mcp}
 }
 ```
