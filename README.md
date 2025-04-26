@@ -118,7 +118,7 @@ You can use LiteLLM as a proxy to route requests to OpenAI models. This is helpf
 To set up LiteLLM:
 
 1. Install LiteLLM: `pip install litellm`
-2. Run LiteLLM as a proxy server: `litellm --model gpt-3.5-turbo`
+2. Run LiteLLM as a proxy server: `litellm --model gpt-4o`
 3. Set the proxy URL in your `.env` file: `LITELLM_BASE_URL=http://localhost:4000`
 
 For more advanced LiteLLM proxy configurations, refer to the LiteLLM documentation.
@@ -131,9 +131,7 @@ For more advanced LiteLLM proxy configurations, refer to the LiteLLM documentati
 - `mixtral-8x7b-32768`: Mixtral model with large context window
 
 ### OpenAI Models
-- `gpt-3.5-turbo`: Fast, cost-effective model
 - `gpt-4o`: High-quality reasoning model with vision capabilities
-- `gpt-4-turbo`: Powerful model with large context window
 
 ## Usage
 
@@ -207,17 +205,120 @@ The system generates a structured JSON transcript that shows the full conversati
     "agent": "Human",
     "role": "user",
     "content": "Research the impact of quantum computing on encryption standards",
-    "message_id": "msg_1682594371",
-    "references": []
+    "message_id": "msg_d5142c3e63",
+    "references": [],
+    "timestamp": 1745616389.2799501
   },
   {
     "agent": "ResearchBot",
     "role": "assistant",
-    "content": "I've researched the current state of quantum computing's impact on encryption standards. Here are my findings...",
-    "message_id": "msg_1682594382",
-    "references": ["msg_1682594371"]
+    "content": "Quantum computing is poised to have a significant impact on encryption standards, as it introduces both challenges and opportunities in the field of cryptography. Here is an overview of how quantum computing is expected to affect encryption:\n\n### Current Encryption Standards\n\n1. **Classical Cryptography**: Most of today's encryption relies on classical algorithms such as RSA, ECC (Elliptic Curve Cryptography), and AES (Advanced Encryption Standard). These rely on the difficulty of problems like integer factorization and discrete logarithm, which are computationally intensive for classical computers.\n\n2. **Public Key Cryptography**: RSA and ECC are widely used for secure communications. Their security is based on problems that quantum computers are expected to solve more efficiently using specific algorithms.\n\n### Quantum Threats to Encryption\n\n1. **Shor's Algorithm**: Developed by mathematician Peter Shor, this algorithm can efficiently solve integer factorization and discrete logarithm problems on a sufficiently powerful quantum computer. This poses a direct threat to RSA and ECC, potentially rendering them insecure once large-scale quantum computers become available (Shor, 1997).\n\n2. **Grover's Algorithm**: This algorithm provides a quadratic speedup for unstructured search problems and affects symmetric key cryptography like AES. While it does not break these systems, it implies that key lengths need to be doubled to maintain the same level of security (Grover, 1996).\n\n### Post-Quantum Cryptography\n\n1. **NIST's Role**: The National Institute of Standards and Technology (NIST) is leading an initiative to standardize post-quantum cryptographic algorithms. This involves selecting algorithms that are resistant to quantum attacks while remaining efficient on classical computers.\n\n2. **Candidate Algorithms**: Various candidates are being evaluated, including lattice-based cryptography, hash-based cryptography, code-based cryptography, and multivariate polynomial cryptography. These rely on mathematical problems that are currently believed to be resistant to quantum attacks.\n\n3. **Timeline and Adoption**: NIST aims to finalize the standardization process by the mid-2020s, but widespread adoption will require significant updates to current systems, software, and infrastructure.\n\n### Opportunities and Innovations\n\n1. **Quantum Key Distribution (QKD)**: This technology uses quantum mechanics principles to create secure communication channels. QKD enables the secure exchange of cryptographic keys with provable security, immune to the computational capabilities of future quantum computers.\n\n2. **Quantum-Resistant Protocols**: Organizations and governments are beginning to develop and test quantum-resistant protocols to future-proof their communications and data security systems.\n\n### Challenges and Considerations\n\n1. **Transition Costs**: Moving to post-quantum cryptography requires updating infrastructure, which can be costly and time-consuming. Organizations must assess the risk and prioritize their transition strategies.\n\n2. **Interoperability**: Ensuring that new cryptographic standards work seamlessly across different systems and platforms is a significant challenge.\n\n3. **Uncertainty in Quantum Advancements**: The timeline for achieving large-scale quantum computing remains uncertain, which complicates planning efforts for transitioning to post-quantum cryptography.\n\n### Conclusion\n\nQuantum computing represents both a challenge and an opportunity for encryption standards. While it threatens to undermine current cryptographic systems, efforts to develop quantum-resistant algorithms and technologies like QKD show promise. The ongoing research and standardization efforts by organizations like NIST are crucial in preparing for a post-quantum world. Despite these advancements, uncertainties remain regarding the timeline of quantum breakthroughs and the eventual rollout of new cryptographic standards.\n\n### References\n\n- Shor, P. W. (1997). Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer. SIAM Journal on Computing, 26(5), 1484\u20131509.\n- Grover, L. K. (1996). A Fast Quantum Mechanical Algorithm for Database Search. Proceedings of the 28th Annual ACM Symposium on Theory of Computing, 212\u2013219.",
+    "message_id": "msg_82ff521bbc",
+    "references": [
+      "msg_d5142c3e63"
+    ],
+    "timestamp": 1745616405.599421
   },
-  ...
+  {
+    "agent": "Orchestrator",
+    "role": "user",
+    "content": "Based on the research provided, please synthesize the key points and provide a critical analysis.",
+    "message_id": "msg_2ce9863f00",
+    "references": [
+      "msg_82ff521bbc"
+    ],
+    "timestamp": 1745616405.599514
+  },
+  {
+    "agent": "SynthBot",
+    "role": "assistant",
+    "content": "**Synthesis of Key Points:**\n\n1. Quantum computing poses a significant threat to current encryption standards, particularly RSA and ECC, due to Shor's algorithm, which can efficiently solve integer factorization and discrete logarithm problems.\n2. Post-quantum cryptography aims to develop algorithms resistant to quantum attacks, with NIST leading the standardization effort.\n3. Candidate algorithms, such as lattice-based, hash-based, code-based, and multivariate polynomial cryptography, are being evaluated for their resistance to quantum attacks.\n4. Quantum Key Distribution (QKD) offers a secure method for exchanging cryptographic keys, immune to quantum attacks.\n5. The transition to post-quantum cryptography will require significant updates to infrastructure, software, and systems, involving substantial costs and time.\n\n**Critical Analysis:**\n\n**Strengths:**\n\n1. The research provides a comprehensive overview of the impact of quantum computing on encryption standards, highlighting the threats and opportunities.\n2. The discussion on post-quantum cryptography and the NIST standardization effort is well-informed and up-to-date.\n3. The mention of QKD as a secure method for key exchange is a valuable addition to the analysis.\n\n**Weaknesses and Limitations:**\n\n1. The research could benefit from a more in-depth analysis of the candidate algorithms being evaluated for post-quantum cryptography.\n2. The discussion on the transition costs and challenges could be more detailed, including estimates of the financial burden and potential timelines for implementation.\n3. The research does not provide a thorough examination of the current state of quantum computing, including the current capabilities and limitations of quantum computers.\n4. The analysis could be strengthened by including expert opinions or quotes from researchers in the field to add depth and diversity to the discussion.\n5. The research does not explore potential mitigation strategies or risk management approaches that organizations could adopt to minimize the impact of quantum attacks on their encryption systems.\n\n**Suggestions for Further Investigation:**\n\n1. Conduct a more detailed analysis of the candidate algorithms being evaluated for post-quantum cryptography, including their strengths, weaknesses, and potential use cases.\n2. Investigate the current state of quantum computing, including the capabilities and limitations of current quantum computers, to better understand the timeline for achieving large-scale quantum computing.\n3. Examine the potential risks and consequences of not transitioning to post-quantum cryptography, including the potential impact on national security and critical infrastructure.\n4. Explore the development of hybrid approaches that combine classical and quantum cryptography to provide enhanced security.\n5. Investigate the role of government and regulatory bodies in promoting the adoption of post-quantum cryptography and supporting the development of quantum-resistant technologies.",
+    "message_id": "msg_5ca33fb284",
+    "references": [
+      "msg_2ce9863f00"
+    ],
+    "timestamp": 1745616407.6192691
+  },
+  {
+    "agent": "Orchestrator",
+    "role": "user",
+    "content": "Consider the synthesis and critique above. Please investigate further on any gaps or areas that need more explanation.",
+    "message_id": "msg_436d096543",
+    "references": [
+      "msg_5ca33fb284"
+    ],
+    "timestamp": 1745616407.619336
+  },
+  {
+    "agent": "ResearchBot",
+    "role": "assistant",
+    "content": "To address the identified gaps and areas requiring further explanation, let's delve deeper into the following topics:\n\n### Detailed Analysis of Candidate Algorithms for Post-Quantum Cryptography\n\n1. **Lattice-Based Cryptography**: This approach leverages the hardness of lattice problems, such as the Shortest Vector Problem (SVP), which are believed to be resistant to quantum attacks. Lattice-based schemes like NTRUEncrypt and the Learning with Errors (LWE) problem are promising due to their efficiency and strong security guarantees (Peikert, 2016).\n\n2. **Hash-Based Cryptography**: Hash-based signatures, like the Merkle signature scheme, rely on the security of hash functions. While suitable for digital signatures, their use in encryption is limited due to large signature sizes and processing overhead (Buchmann et al., 2011).\n\n3. **Code-Based Cryptography**: This involves using error-correcting codes, with the McEliece cryptosystem being a notable example. It offers strong security but suffers from large key sizes, which can be a drawback in practical applications (Bernstein et al., 2008).\n\n4. **Multivariate Polynomial Cryptography**: These systems, such as the HFE (Hidden Field Equations) cryptosystem, rely on the difficulty of solving systems of multivariate quadratic equations. They offer potential for efficient encryption but face challenges related to vulnerability to specific algebraic attacks (Ding et al., 2008).\n\n### Transition Costs and Implementation Challenges\n\nTransitioning to post-quantum cryptography involves several challenges:\n\n1. **Infrastructure Overhaul**: Organizations need to upgrade hardware and software systems to support new cryptographic standards. This includes updating protocols, libraries, and, in some cases, entire communication systems.\n\n2. **Cost Implications**: The financial burden of transitioning can be substantial, especially for large organizations with complex IT infrastructures. Cost estimates vary widely based on the scale of implementation and the specific technologies involved.\n\n3. **Timeline for Transition**: While NIST aims to finalize standards by the mid-2020s, widespread adoption could take years. Organizations must balance the urgency of transitioning with operational and budgetary constraints.\n\n### Current State of Quantum Computing\n\n1. **Quantum Capabilities**: As of 2023, quantum computers have demonstrated the ability to solve specific problems faster than classical computers, known as quantum supremacy. However, they remain limited in terms of qubit count and error rates, restricting their practical application in breaking encryption.\n\n2. **Timeline Uncertainty**: Predictions for when quantum computers will be capable of breaking current encryption vary. Estimates range from 10 to 30 years, depending on technological advancements and investments in quantum research.\n\n### Mitigation Strategies and Risk Management\n\n1. **Hybrid Cryptography**: Combining classical and post-quantum cryptography can offer a transitional solution, providing security against both classical and quantum attacks. This approach allows for gradual integration of new standards.\n\n2. **Regular Security Audits**: Organizations should conduct regular audits to assess their cryptographic practices and identify vulnerabilities to quantum threats. This includes keeping abreast of advancements in quantum computing and cryptography.\n\n3. **Government and Regulatory Support**: Governments play a crucial role in promoting the adoption of post-quantum standards through regulatory frameworks, funding research, and providing guidelines for secure communication practices.\n\n### Expert Opinions and Perspectives\n\nTo enrich the discussion, including perspectives from leading researchers and industry experts is valuable:\n\n1. **Daniel J. Bernstein**, a prominent cryptographer, advocates for the early adoption of post-quantum cryptography to preempt quantum threats (Bernstein et al., 2017).\n\n2. **Michele Mosca**, co-founder of the Institute for Quantum Computing, emphasizes the importance of preparing for quantum advancements, even if their timeline remains uncertain (Mosca, 2015).\n\n### Conclusion\n\nWhile significant progress is being made toward post-quantum cryptography, challenges remain in terms of transition costs, implementation, and the uncertain timeline of quantum advancements. By exploring hybrid approaches and fostering collaboration between governments and industry, organizations can better prepare for a quantum future. Continued research and expert engagement are crucial to navigate this evolving landscape.\n\n### References\n\n- Bernstein, D. J., et al. (2008). \"Post-Quantum Cryptography.\" Springer, Berlin, Heidelberg.\n- Bernstein, D. J., et al. (2017). \"The Case for Post-Quantum Cryptography.\" [Online]. Available: [https://pqcrypto.org](https://pqcrypto.org)\n- Buchmann, J., et al. (2011). \"Introduction to Quantum-Safe Cryptography.\" Springer.\n- Ding, J., et al. (2008). \"Multivariate Public Key Cryptosystems.\" Springer, Berlin, Heidelberg.\n- Mosca, M. (2015). \"Cybersecurity in an Era with Quantum Computers: Will We Be Ready?\" IACR Cryptology ePrint Archive.\n- Peikert, C. (2016). \"A Decade of Lattice Cryptography.\" Foundations and Trends in Theoretical Computer Science.",
+    "message_id": "msg_cabd9d5cf2",
+    "references": [
+      "msg_436d096543"
+    ],
+    "timestamp": 1745616425.959903
+  },
+  {
+    "agent": "Orchestrator",
+    "role": "user",
+    "content": "Based on the research provided, please synthesize the key points and provide a critical analysis.",
+    "message_id": "msg_21d27a82c3",
+    "references": [
+      "msg_cabd9d5cf2"
+    ],
+    "timestamp": 1745616425.960042
+  },
+  {
+    "agent": "SynthBot",
+    "role": "assistant",
+    "content": "**Synthesis of Key Points:**\n\n1. Post-quantum cryptography is essential to mitigate the threat of quantum computers breaking current encryption standards.\n2. Lattice-based, hash-based, code-based, and multivariate polynomial cryptography are promising approaches to post-quantum cryptography.\n3. Transitioning to post-quantum cryptography involves significant infrastructure overhauls, cost implications, and timeline uncertainty.\n4. Hybrid cryptography, combining classical and post-quantum cryptography, can offer a transitional solution.\n5. Regular security audits, government support, and expert engagement are crucial for navigating the evolving landscape of post-quantum cryptography.\n\n**Critical Analysis:**\n\n**Strengths:**\n\n1. The research provides a comprehensive overview of the importance of post-quantum cryptography and the various approaches being explored.\n2. The discussion on the challenges of transitioning to post-quantum cryptography is well-informed and highlights the need for a nuanced approach.\n3. The inclusion of expert opinions and perspectives adds depth and diversity to the analysis.\n\n**Weaknesses and Limitations:**\n\n1. The research could benefit from a more detailed analysis of the strengths and weaknesses of each post-quantum cryptography approach.\n2. The discussion on the cost implications of transitioning to post-quantum cryptography could be more detailed, including estimates and case studies.\n3. The research does not explore the potential risks and consequences of not transitioning to post-quantum cryptography, including the potential impact on national security and critical infrastructure.\n4. The analysis could be strengthened by including more diverse perspectives from experts in the field, including those from industry and government.\n\n**Suggestions for Further Investigation:**\n\n1. Conduct a more detailed comparison of the strengths and weaknesses of lattice-based, hash-based, code-based, and multivariate polynomial cryptography approaches.\n2. Investigate the cost implications of transitioning to post-quantum cryptography, including estimates and case studies.\n3. Examine the potential risks and consequences of not transitioning to post-quantum cryptography, including the impact on national security and critical infrastructure.\n4. Explore the role of government and regulatory bodies in promoting the adoption of post-quantum cryptography standards.\n5. Investigate the potential applications of post-quantum cryptography beyond encryption, including digital signatures and authentication.\n\nOverall, the research provides a solid foundation for understanding the importance of post-quantum cryptography and the various approaches being explored. However, further investigation is needed to address the gaps and limitations identified in this critical analysis.",
+    "message_id": "msg_5275859dc4",
+    "references": [
+      "msg_21d27a82c3"
+    ],
+    "timestamp": 1745616427.8029928
+  },
+  {
+    "agent": "Orchestrator",
+    "role": "user",
+    "content": "Consider the synthesis and critique above. Please investigate further on any gaps or areas that need more explanation.",
+    "message_id": "msg_60dc8c98b5",
+    "references": [
+      "msg_5275859dc4"
+    ],
+    "timestamp": 1745616427.803075
+  },
+  {
+    "agent": "ResearchBot",
+    "role": "assistant",
+    "content": "To address the identified gaps and areas requiring further explanation, let's focus on a more detailed analysis of the strengths and weaknesses of post-quantum cryptography approaches, the cost implications of transitioning, and the potential risks of not adopting these new standards.\n\n### Detailed Comparison of Post-Quantum Cryptography Approaches\n\n1. **Lattice-Based Cryptography**\n   - **Strengths**: Offers strong security based on well-understood mathematical problems. It supports efficient encryption and signature schemes and is adaptable to various cryptographic protocols.\n   - **Weaknesses**: Key sizes can be larger than those used in current systems, which can lead to increased storage and transmission costs (Micciancio & Regev, 2009).\n\n2. **Hash-Based Cryptography**\n   - **Strengths**: Provides robust security relying only on the properties of hash functions. It's particularly suitable for digital signatures.\n   - **Weaknesses**: Signature sizes are relatively large, and the one-time nature of hash-based signatures can require careful management to avoid reuse (Buchmann et al., 2011).\n\n3. **Code-Based Cryptography**\n   - **Strengths**: The McEliece cryptosystem offers a long track record of security and is resistant to known quantum attacks.\n   - **Weaknesses**: The large key sizes required can be impractical for many applications, posing challenges for deployment (Bernstein et al., 2008).\n\n4. **Multivariate Polynomial Cryptography**\n   - **Strengths**: Provides high-speed encryption and decryption processes, which can be advantageous in certain applications.\n   - **Weaknesses**: Vulnerable to specific algebraic attacks, and the complexity of securing these systems remains a challenge (Ding et al., 2008).\n\n### Cost Implications and Transition Challenges\n\n1. **Cost Estimates**: Transitioning to post-quantum cryptography involves direct costs, such as upgrading hardware and software, and indirect costs, such as retraining personnel and potential downtime during the transition. For large organizations, these costs can reach millions of dollars, particularly if they have extensive legacy systems.\n\n2. **Case Studies**: While specific case studies are limited, some financial institutions and tech companies have begun pilot projects to assess the feasibility and costs associated with adopting post-quantum cryptography.\n\n3. **Timeline for Transition**: The complexity of the transition requires long-term planning and phased implementation. Organizations may prioritize systems based on their sensitivity to quantum threats and the feasibility of updating them.\n\n### Potential Risks of Not Transitioning\n\n1. **National Security**: The inability to secure communications and data against quantum attacks poses significant risks to national security. Critical infrastructure, such as energy grids and financial systems, could be vulnerable to disruption.\n\n2. **Data Privacy**: The potential for future decryption of encrypted data means that sensitive information could be at risk even if it is not currently accessible. This is particularly concerning for industries handling personal or proprietary data, such as healthcare and finance.\n\n3. **Economic Impact**: A failure to adopt quantum-resistant cryptography could lead to economic losses due to data breaches and the loss of consumer trust. Companies could face legal liabilities if they fail to protect customer data adequately.\n\n### Government and Regulatory Role\n\n1. **Standards and Guidelines**: Governments can facilitate the transition by developing and enforcing standards and guidelines for post-quantum cryptography. This includes supporting research and providing incentives for early adoption.\n\n2. **Collaboration with Industry**: Public-private partnerships can accelerate the development and deployment of quantum-resistant technologies. Collaborative efforts can also help share knowledge and best practices across sectors.\n\n### Conclusion\n\nAddressing the gaps in the transition to post-quantum cryptography requires a multifaceted approach involving detailed analysis of cryptographic options, careful planning for implementation, and consideration of the broader impacts on security and the economy. By fostering collaboration between governments, industry, and academia, the transition can be managed more effectively, ensuring that systems remain secure in the face of emerging quantum threats.\n\n### References\n\n- Micciancio, D., & Regev, O. (2009). \"Lattice-based Cryptography.\" In Post-Quantum Cryptography, Springer.\n- Buchmann, J., et al. (2011). \"Introduction to Quantum-Safe Cryptography.\" Springer.\n- Bernstein, D. J., et al. (2008). \"Post-Quantum Cryptography.\" Springer, Berlin, Heidelberg.\n- Ding, J., et al. (2008). \"Multivariate Public Key Cryptosystems.\" Springer, Berlin, Heidelberg.",
+    "message_id": "msg_47f2f96339",
+    "references": [
+      "msg_60dc8c98b5"
+    ],
+    "timestamp": 1745616456.684787
+  },
+  {
+    "agent": "Orchestrator",
+    "role": "user",
+    "content": "Based on the research provided, please synthesize the key points and provide a critical analysis.",
+    "message_id": "msg_bb238c3303",
+    "references": [
+      "msg_47f2f96339"
+    ],
+    "timestamp": 1745616456.6848378
+  },
+  {
+    "agent": "SynthBot",
+    "role": "assistant",
+    "content": "**Synthesis of Key Points:**\n\n1. Post-quantum cryptography is essential to mitigate the threat of quantum computers breaking current encryption standards.\n2. Lattice-based, hash-based, code-based, and multivariate polynomial cryptography are promising approaches to post-quantum cryptography, each with their strengths and weaknesses.\n3. Transitioning to post-quantum cryptography involves significant cost implications, infrastructure overhauls, and timeline uncertainty.\n4. The potential risks of not transitioning to post-quantum cryptography include national security breaches, data privacy compromises, and economic losses.\n5. Governments and regulatory bodies play a crucial role in promoting the adoption of post-quantum cryptography standards through collaboration with industry and academia.\n\n**Critical Analysis:**\n\n**Strengths:**\n\n1. The research provides a comprehensive overview of the importance of post-quantum cryptography and the various approaches being explored.\n2. The discussion on the cost implications and potential risks of not transitioning to post-quantum cryptography is well-informed and highlights the need for urgent action.\n\n**Weaknesses and Limitations:**\n\n1. The research could benefit from a more detailed analysis of the strengths and weaknesses of each post-quantum cryptography approach.\n2. The discussion on the cost implications of transitioning to post-quantum cryptography could be more detailed, including estimates and case studies.\n3. The research does not explore the potential applications of post-quantum cryptography beyond encryption, including digital signatures and authentication.\n4. The analysis could be strengthened by including more diverse perspectives from experts in the field, including those from industry and government.\n\n**Suggestions for Further Investigation:**\n\n1. Conduct a more detailed comparison of the strengths and weaknesses of lattice-based, hash-based, code-based, and multivariate polynomial cryptography approaches.\n2. Investigate the cost implications of transitioning to post-quantum cryptography, including estimates and case studies.\n3. Examine the potential risks and consequences of not transitioning to post-quantum cryptography, including the impact on national security and critical infrastructure.\n4. Explore the role of government and regulatory bodies in promoting the adoption of post-quantum cryptography standards.\n5. Investigate the potential applications of post-quantum cryptography beyond encryption, including digital signatures and authentication.\n\nOverall, the research provides a solid foundation for understanding the importance of post-quantum cryptography and the various approaches being explored. However, further investigation is needed to address the gaps and limitations identified in this critical analysis.",
+    "message_id": "msg_25f501f00d",
+    "references": [
+      "msg_bb238c3303"
+    ],
+    "timestamp": 1745616458.580192
+  }
 ]
 ```
 Terminal output will also show the progress of the research and synthesis process, including the turn-by-turn dialogue between the agents.
