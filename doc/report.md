@@ -1,5 +1,7 @@
 # Analysis Report: Research-Synth-MCP Multi-Agent System
 
+repo: https://github.com/LoadingBFX/research-synth-mcp
+
 ## 1. Introduction
 
 Research-Synth-MCP represents an implementation of a multi-agent AI system using the Model Context Protocol (MCP). This report analyzes the system's agent interaction dynamics, protocol implementation, observed limitations, and potential improvements. The system orchestrates two specialized agents—ResearchBot and SynthBot—to collaboratively tackle complex research tasks with minimal human intervention.
