@@ -8,7 +8,10 @@
 
 **Author:** Fanxing Bu  
 
+
 A multi-agent AI system implementing the Model Context Protocol (MCP) for autonomous collaborative research and analysis.
+
+![](./assets/logo.png)
 
 ## Overview
 
