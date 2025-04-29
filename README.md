@@ -1,6 +1,17 @@
-# Research-Synth-MCP
+# 🤖 Research-Synth-MCP: Multi-Agent Autonomous Research System
+
+![Python](https://img.shields.io/badge/language-Python-blue)
+![Groq](https://img.shields.io/badge/LLM-Groq-orange)
+![OpenAI](https://img.shields.io/badge/LLM-OpenAI-lightgrey)
+![MCP](https://img.shields.io/badge/protocol-MCP-blueviolet)
+![MIT License](https://img.shields.io/badge/license-MIT-green)
+
+**Author:** Fanxing Bu  
+
 
 A multi-agent AI system implementing the Model Context Protocol (MCP) for autonomous collaborative research and analysis.
+
+![](./assets/logo.png)
 
 ## Overview
 
