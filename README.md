@@ -6,6 +6,8 @@
 ![MCP](https://img.shields.io/badge/protocol-MCP-blueviolet)
 ![MIT License](https://img.shields.io/badge/license-MIT-green)
 
+**Author:** Fanxing Bu  
+
 A multi-agent AI system implementing the Model Context Protocol (MCP) for autonomous collaborative research and analysis.
 
 ## Overview
